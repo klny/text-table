@@ -2,16 +2,19 @@ const table = require('../index');
 
 const obj = {
   first: {
+    samples: [1, 1000],
     max: 1000,
     min: 1,
-    avg: 500
+    avg: 500,
+    obj: {}
   },
   second: {
+    samples: [2, 7.5350695, 5, 5, 5, 5, 5],
     max: 7.5350695,
-    min: 2,
     avg: 5
   },
   third: {
+    samples: [15, 11, 12, 13, 14, 15],
     max: 15,
     min: 11,
     avg: 13

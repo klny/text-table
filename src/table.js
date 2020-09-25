@@ -1,47 +1,12 @@
 const config = require('./config');
 const utils = require('./utils');
+const cols = require('./columns');
 
-// convert JS object to array
-function objToArr(data) {
-  const arr = [];
-  Object.keys(data).forEach(key => {
-    arr.push({'': key, ...data[key]});
-  });
-
-  return arr;
-}
-
-function createNewColumn(value) {
-  return {
-    type: isNaN(value) ? 'string' : (utils.isDecimal(value) ? 'decimal' : 'integer'),
-    length: utils.length(value)
-  }
-}
-
-function addOrUpdateColumn(params, name, value) {
-  // create new param if not found
-  if (!params[name]) {
-    params[name] = createNewColumn(value);
-    return;
-  }
-
-  // update type of numeric columns
-  if (params[name].type === 'integer') {
-    if (utils.isDecimal(value)) params[name].type = 'decimal';
-  }
-
-  // resolve column length
-  params[name].length = utils.greater(params[name].length, utils.length(value), name.length);
-}
-
-// get description of table columns
-function getTableColumns(data) {
-  const params = {};
-  data.forEach(item => {
-    Object.keys(item).forEach(key => addOrUpdateColumn(params, key, item[key]));
-  });
-
-  return params;
+function getCellValue(value, type) {
+  if (!value) return '';
+  if (type === 'object') return 'object';
+  if (type === 'array') return value.length;
+  return (type === 'decimal' ? value.toFixed(config.decimalPlaces) : value);
 }
 
 // get table row from object
@@ -51,14 +16,14 @@ function getRow(obj, columns) {
 
   let row = '';
   let isFirst = true;
-  Object.keys(obj).forEach(key => {
+  Object.keys(columns).forEach(key => {
     const cnf = columns[key];
     const len = (cnf.type === 'decimal' ? cnf.length + config.decimalPlaces + 1 : cnf.length);
 
     if (obj === columns) {
       row += (isFirst ? space : divider) + utils.cpad(key, len);
     } else {
-      const value = (cnf.type === 'decimal' ? obj[key].toFixed(config.decimalPlaces) : obj[key]);
+      const value = getCellValue(obj[key], cnf.type);
       row += (isFirst ? space : divider) + utils.pad(value, len, (cnf.type === 'string' ? 'R' : 'L'));
     }
 
@@ -68,16 +33,17 @@ function getRow(obj, columns) {
   return row;
 }
 
+// create text table from JS object/array
 function getTable(name, data, units) {
   // normalize and check array
-  const arr = utils.isObject(data) ? objToArr(data) : data;
+  const arr = utils.isObject(data) ? utils.objToArr(data) : data;
   if (!Array.isArray(arr) || arr.length === 0) return null;
 
   // add units to every data row if provided
   const dataRowEnd = (units ? '   [' + units + ']' : '');
 
   // get columns settings and create table header
-  const columns = getTableColumns(arr);
+  const columns = cols(arr);
   const header = getRow(columns, columns);
   const length = header.length + dataRowEnd.length;
   const divider = '\n' + utils.lpad('', length, '-');

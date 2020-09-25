@@ -117,6 +117,12 @@ console.log(table(' - - - performance stats reconfigured - - - ', obj, 'min'));
    
 ```
 
+## Limitations
+ * library works only with array or object representation of JS objects
+ * only first level of included objects is transformed to a table (no inner tables)
+ * array length will be printed in case of inner array
+ * string 'object' will be printed in case of inner object  
+
 ## Installation
 ```bash
 $ npm install @klny/text-table

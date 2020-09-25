@@ -1,8 +1,17 @@
 const config = require('./config');
 
+// convert JS object to array
+function objToArr(data) {
+  const arr = [];
+  Object.keys(data).forEach(key => {
+    arr.push({'': key, ...data[key]});
+  });
+
+  return arr;
+}
+
 function isObject(x) {
-  if (!x || typeof x !== 'object' || Array.isArray(x)) return false;
-  return Object.keys(x).length > 0;
+  return !(!x || typeof x !== 'object' || Array.isArray(x));
 }
 
 function isDecimal(val) {
@@ -11,6 +20,8 @@ function isDecimal(val) {
 
 function length(val) {
   if (!val) return 0;
+  if (Array.isArray(val)) return length(val.length); // length of string representation of array.length
+  if (isObject(val)) return 6;                       // length of string 'object'
   if (isNaN(val)) return val.length;
 
   return Math.round(val).toString().length;
@@ -50,6 +61,7 @@ function newLines(count) {
 }
 
 module.exports = {
+  objToArr: objToArr,
   isObject: isObject,
   isDecimal: isDecimal,
   length: length,
