@@ -113,7 +113,7 @@ console.log(table(' - - - performance stats reconfigured - - - ', obj, 'min'));
 ```
 
 ## Limitations
- * library works only with array or object representation of JS objects
+ * works with array/object representation of JS objects only
  * only first level of included objects is transformed to a table (no inner tables)
  * array length will be printed in case of inner array
  * string 'object' will be printed in case of inner object  
