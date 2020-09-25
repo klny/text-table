@@ -45,7 +45,7 @@ Print array as table:
 const table = require('@klny/text-table');
  
 const arr = [
-  { product: 'tv', description: 'oled television 55"', price: 1500 },
+  { product: 'tv', description: 'oled television', price: 1500 },
   { product: 'ps4pro', description: 'playstation 4 pro', price: 450 },
   { product: 'notebook', description: 'hp elitebook 840 G5', price: 935 }
 ];
@@ -59,7 +59,7 @@ console.log(table(' - - - product list - - - ', arr));
  
    product |     description     | price
  ---------------------------------------
-  tv       | oled television 55" |  1500
+  tv       | oled television     |  1500
   ps4pro   | playstation 4 pro   |   450
   notebook | hp elitebook 840 G5 |   935
   
