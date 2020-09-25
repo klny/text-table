@@ -89,10 +89,6 @@ table.configure({
   columnDivider: ' ',
   decimalPlaces: 15
 });
-```
-
-```js
-const table = require('@klny/text-table');
 
 const obj = {
   first: { max: 1000, min: 1, avg: 500 },
@@ -100,7 +96,6 @@ const obj = {
   third: { max: 15, min: 11, avg: 13 }
 };
 
-table.configure({ cellSpacing: 3, columnDivider: ' ', decimalPlaces: 15 });
 console.log(table(' - - - performance stats reconfigured - - - ', obj, 'min'));
 ```
 
