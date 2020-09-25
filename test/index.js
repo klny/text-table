@@ -55,6 +55,9 @@ async function test() {
   console.log('table of array');
   console.log(table(' - - - product list - - - ', arr));
 
+  console.log('table of array w/o name');
+  console.log(table('', arr));
+
   console.log('reconfigure table');
   table.configure({
     cellSpacing: 3,

@@ -2,6 +2,7 @@ const config = require('./config');
 const utils = require('./utils');
 const cols = require('./columns');
 
+
 function getCellValue(value, type) {
   if (!value) return '';
   if (type === 'object') return 'object';
@@ -54,7 +55,11 @@ function getTable(name, data, units) {
     content += '\n' + getRow(item, columns) + dataRowEnd;
   });
 
-  return utils.newLines(config.emptyLinesTop) + utils.cpad(name, length) + utils.newLines(config.emptyLinesAfterName + 1) + header + divider + content + utils.newLines(config.emptyLinesBottom);
+  let table = utils.newLines(config.emptyLinesTop);
+  table += name ? utils.cpad(name, length) + utils.newLines(config.emptyLinesAfterName + 1) : '';
+  table += header + divider + content + utils.newLines(config.emptyLinesBottom);
+
+  return table;
 }
 
 module.exports = getTable;
