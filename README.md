@@ -11,7 +11,7 @@ function table(tableName, data, units) {};
 
  * tableName - name of the table, will be centralized above table (empty string to skip)
  * data - JS object/array to be printed as table
- * units - optional, if provided will be printed at the end of each data row inside []
+ * units - optional, will be printed at the end of each data row inside [] if provided
 
 ## Examples
 Print JS object as table:  
