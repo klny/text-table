@@ -14,8 +14,11 @@
     "javascript",
     "table",
     "text",
+    "text table",
     "object",
+    "object as table",
     "array",
+    "array as table",
     "console",
     "log"
   ],

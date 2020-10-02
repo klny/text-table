@@ -11,7 +11,7 @@ function table(tableName, data, units) {};
 
  * tableName - name of the table, will be centralized above table (empty string to skip)
  * data - JS object/array to be printed as table
- * units - optional, if provided will be printed at the end of each data row inside []
+ * units - optional, will be printed at the end of each data row inside [] if provided
 
 ## Examples
 Print JS object as table:  
@@ -45,7 +45,7 @@ Print array as table:
 const table = require('@klny/text-table');
  
 const arr = [
-  { product: 'tv', description: 'oled television 55"', price: 1500 },
+  { product: 'tv', description: 'oled television', price: 1500 },
   { product: 'ps4pro', description: 'playstation 4 pro', price: 450 },
   { product: 'notebook', description: 'hp elitebook 840 G5', price: 935 }
 ];
@@ -59,7 +59,7 @@ console.log(table(' - - - product list - - - ', arr));
  
    product |     description     | price
  ---------------------------------------
-  tv       | oled television 55" |  1500
+  tv       | oled television     |  1500
   ps4pro   | playstation 4 pro   |   450
   notebook | hp elitebook 840 G5 |   935
   
@@ -89,10 +89,6 @@ table.configure({
   columnDivider: ' ',
   decimalPlaces: 15
 });
-```
-
-```js
-const table = require('@klny/text-table');
 
 const obj = {
   first: { max: 1000, min: 1, avg: 500 },
@@ -100,7 +96,6 @@ const obj = {
   third: { max: 15, min: 11, avg: 13 }
 };
 
-table.configure({ cellSpacing: 3, columnDivider: ' ', decimalPlaces: 15 });
 console.log(table(' - - - performance stats reconfigured - - - ', obj, 'min'));
 ```
 
@@ -118,8 +113,8 @@ console.log(table(' - - - performance stats reconfigured - - - ', obj, 'min'));
 ```
 
 ## Limitations
- * library works only with array or object representation of JS objects
- * only first level of included objects is transformed to a table (no inner tables)
+ * works with array/object representation of JS objects only
+ * only first level of included objects are printed in table (no inner tables)
  * array length will be printed in case of inner array
  * string 'object' will be printed in case of inner object  
 
