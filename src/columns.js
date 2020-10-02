@@ -1,6 +1,6 @@
 const utils = require('./utils');
 
-function createNewColumn(value) {
+function createNewColumn(name, value) {
   let type = '';
   if (Array.isArray(value)) {
     type = 'array';
@@ -12,14 +12,14 @@ function createNewColumn(value) {
 
   return {
     type: type,
-    length: utils.length(value)
+    length: utils.greater(name.length, utils.length(value))
   }
 }
 
 function addOrUpdateColumn(params, name, value) {
   // create new param if not found
   if (!params[name]) {
-    params[name] = createNewColumn(value);
+    params[name] = createNewColumn(name, value);
     return;
   }
 
@@ -29,7 +29,7 @@ function addOrUpdateColumn(params, name, value) {
   }
 
   // resolve column length
-  params[name].length = utils.greater(params[name].length, utils.length(value), name.length);
+  params[name].length = utils.greater(params[name].length, utils.length(value));
 }
 
 // get description of table columns
