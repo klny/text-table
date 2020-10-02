@@ -1,6 +1,6 @@
 {
   "name": "@klny/text-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create text table from JS objects/arrays to visualize data in console/log",
   "main": "index.js",
   "scripts": {
