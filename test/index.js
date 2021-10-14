@@ -24,7 +24,7 @@ const obj = {
 const arr = [
   {
     product: 'tv',
-    description: 'oled television 55"',
+    description: 'oled television 55',
     price: 1500
   },
   {

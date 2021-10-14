@@ -34,7 +34,7 @@ function greater(x, y, z = 0) {
 // left pad string to specified length with specified char
 function pad(str, length, type = 'L', char = ' ') {
   let padding = '';
-  let strLen = str ? ('' + str).length : 0;
+  let strLen = ('' + str).length;
 
   for (let i = strLen; i < length; i++) {
     padding += char;
